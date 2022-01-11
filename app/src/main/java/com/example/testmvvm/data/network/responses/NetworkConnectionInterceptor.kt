@@ -2,7 +2,6 @@ package com.example.testmvvm.data.network.responses
 
 import android.content.Context
 import android.net.ConnectivityManager
-import androidx.core.net.ConnectivityManagerCompat
 import com.example.testmvvm.ulti.NoInternetException
 import okhttp3.Interceptor
 import okhttp3.Response

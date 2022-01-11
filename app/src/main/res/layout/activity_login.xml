@@ -2,6 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+
         <variable
             name="viewmodel"
             type="com.example.testmvvm.ui.auth.AuthViewModel" />
@@ -73,10 +74,10 @@
             android:text="Login" />
 
         <TextView
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
+            android:onClick="@{viewmodel::onSignup}"
             android:text="Don't have an account?\nSign Up Here" />
 
 
