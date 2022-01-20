@@ -5,6 +5,7 @@ import com.example.testmvvm.data.network.CallAPI
 import com.example.testmvvm.data.network.responses.NetworkConnectionInterceptor
 import com.example.testmvvm.data.network.responses.QuotesResponeses
 import com.example.testmvvm.data.preferences.PreferenceProvider
+import com.example.testmvvm.data.respositoris.QuotesRespositoris
 import com.example.testmvvm.data.respositoris.UserReponsitory
 import com.example.testmvvm.database.AppDatabase
 import com.example.testmvvm.ui.auth.AuthViewModelFactory
@@ -29,7 +30,8 @@ open class MVVMApplication : Application(), KodeinAware {
         bind() from singleton { AppDatabase(instance()) }
         bind() from singleton { UserReponsitory(instance(), instance() )}
         bind() from singleton { PreferenceProvider(instance() )}
-        bind() from singleton { QuotesResponeses(instance()) }
+//        bind() from singleton { QuotesResponeses(instance()) }
+        bind() from singleton { QuotesRespositoris(instance(), instance(), instance()) }
         bind() from provider {AuthViewModelFactory(instance())  }
         bind() from provider {ProfileFragmentViewModelFactory(instance())  }
         bind() from provider {QuotesViewModelFactory(instance())  }
