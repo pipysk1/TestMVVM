@@ -13,12 +13,12 @@ import kotlinx.coroutines.withContext
 import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
 
-private val MININUM_INTERAL=6
+private val MININUM_INTERAL = 6
 
 class QuotesRespositoris(
     private val api: CallAPI,
-    private val db: AppDatabase
-    ,private val prefs:PreferenceProvider
+    private val db: AppDatabase,
+    private val prefs: PreferenceProvider
 
 ) : SafeApiRequest() {
     private val quotes = MutableLiveData<List<Quote>>()
@@ -29,30 +29,29 @@ class QuotesRespositoris(
         }
     }
 
-    suspend fun getQuotes():LiveData<List<Quote>>
-    {
-        return withContext(Dispatchers.IO){
+    suspend fun getQuotes(): LiveData<List<Quote>> {
+        return withContext(Dispatchers.IO) {
             fetchQuotes()
             db.getQuotesDao().getQuotes()
         }
     }
 
     private suspend fun fetchQuotes() {
-        val lastSaveAt=prefs.getLastSaveAt()
-        if (lastSaveAt==null||isFetchNeeded(LocalDateTime.parse(lastSaveAt))) {
-try {
-    val response = apiRequest { api.getQuotes() }
-    quotes.postValue(response.data)
-}catch (e:Exception){
-    e.printStackTrace()
-}
+        val lastSaveAt = prefs.getLastSaveAt()
+        if (lastSaveAt == null || isFetchNeeded(LocalDateTime.parse(lastSaveAt))) {
+            try {
+                val response = apiRequest { api.getQuotes() }
+                quotes.postValue(response.data)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
 
         }
 
     }
 
     private fun isFetchNeeded(saveAt: LocalDateTime): Boolean {
-        return ChronoUnit.HOURS.between(saveAt,LocalDateTime.now())> MININUM_INTERAL
+        return ChronoUnit.HOURS.between(saveAt, LocalDateTime.now()) > MININUM_INTERAL
     }
 
     private fun saveQuotes(quotes: List<Quote>) {

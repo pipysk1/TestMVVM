@@ -16,8 +16,14 @@
         android:padding="12dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/img_quotes"
+            android:src="@{`'`+quote.avatar+`'`}"
+            android:layout_width="50dp"
+            android:layout_height="50dp"/>
 
         <TextView
+            android:layout_marginLeft="50dp"
             android:id="@+id/quote"
             android:textColor="@color/black"
             android:layout_width="match_parent"
